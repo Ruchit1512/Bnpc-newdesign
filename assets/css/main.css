@@ -17511,9 +17511,9 @@ img, iframe, video {
 
 .bnpc-treatment-img-wrap {
   position: relative;
-  height: 200px;
-  min-height: 200px;
-  max-height: 200px;
+  height: 230px;
+  min-height: 230px;
+  max-height: 230px;
   overflow: hidden;
   background-color: #07192f;
   flex-shrink: 0;
@@ -17879,9 +17879,9 @@ img, iframe, video {
     min-height: 470px;
   }
   .bnpc-treatment-img-wrap {
-    height: 175px !important;
-    min-height: 175px !important;
-    max-height: 175px !important;
+    height: 210px !important;
+    min-height: 210px !important;
+    max-height: 210px !important;
   }
   .bnpc-treatment-card-body {
     padding: 18px 16px;
