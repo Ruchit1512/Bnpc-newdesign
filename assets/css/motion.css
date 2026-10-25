@@ -1,0 +1,1041 @@
+/* ==============================================================
+   BNPC BHOPAL — MODERN MOTION & EDITORIAL UI SYSTEM (2026)
+   Framework-free Plain CSS for GSAP + ScrollTrigger
+   ============================================================== */
+
+/* ---------- 1. TYPOGRAPHY & COLOR HARMONY ---------- */
+:root {
+  --font-editorial: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bnpc-navy-950: #051326;
+  --bnpc-navy-900: #0a1f3d;
+  --bnpc-navy-800: #0f2b52;
+  --bnpc-navy-700: #163a6b;
+  --bnpc-blue-600: #175cdd;
+  --bnpc-blue-500: #2970f5;
+  --bnpc-blue-400: #4da2ff;
+  --bnpc-blue-100: #e8f1ff;
+  --bnpc-blue-50:  #f4f8ff;
+  --bnpc-slate-600: #475569;
+  --bnpc-slate-500: #64748b;
+  --bnpc-border-light: rgba(15, 43, 82, 0.08);
+  --bnpc-border-focus: rgba(23, 92, 221, 0.35);
+  --bnpc-shadow-sm: 0 2px 8px rgba(10, 31, 61, 0.04);
+  --bnpc-shadow-md: 0 8px 24px -4px rgba(10, 31, 61, 0.08), 0 2px 6px -1px rgba(10, 31, 61, 0.03);
+  --bnpc-shadow-lg: 0 20px 40px -12px rgba(10, 31, 61, 0.12), 0 4px 12px -2px rgba(10, 31, 61, 0.04);
+  --bnpc-shadow-3d: 0 30px 60px -15px rgba(10, 31, 61, 0.18), 0 0 1px rgba(10, 31, 61, 0.2);
+}
+
+html {
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
+body {
+  font-family: var(--font-editorial);
+  color: var(--bnpc-slate-600);
+  background-color: #ffffff;
+  overflow-x: clip;
+  overflow-y: visible !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-editorial);
+  color: var(--bnpc-navy-900);
+  letter-spacing: -0.02em;
+}
+
+/* ---------- 2. HEADER & FROSTED NAVBAR TRANSITION ---------- */
+.header .branding {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  border-bottom: 1px solid var(--bnpc-border-light);
+}
+
+body.scrolled .header .branding {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px -10px rgba(10, 31, 61, 0.08);
+  border-bottom: 1px solid rgba(15, 43, 82, 0.08);
+  padding: 10px 0;
+}
+
+body.scrolled .header.fixed-top {
+  box-shadow: none;
+}
+
+/* ---------- 3. CINEMATIC VIDEO HERO SECTION (CLEAN & MODERN 2026 UI) ---------- */
+.hero.bnpc-hero-section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #06152b;
+  background-image: url('../img/bg/unnamed.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  border: 0;
+  outline: none;
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(6, 19, 38, 0.92) 0%,
+    rgba(9, 29, 58, 0.85) 50%,
+    rgba(13, 37, 72, 0.72) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Subtle Vignette for cinematic focus */
+.hero-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 80% 40%,
+    transparent 30%,
+    rgba(4, 14, 28, 0.6) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 130px;
+  padding-bottom: 70px;
+}
+
+.hero-text-col {
+  will-change: transform, opacity;
+}
+
+/* Modern Pill Badge */
+.hero-badge-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(23, 92, 221, 0.16);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 7px 18px;
+  border-radius: 9999px;
+  color: #bfdbfe;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.badge-pulse-glow {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.badge-pulse-glow::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.4);
+  animation: pulseDot 2s infinite ease-out;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* Clean Editorial Heading */
+.hero-title-modern {
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 800;
+  line-height: 1.14;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 60%, #bae6fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.hero-subtitle-modern {
+  font-size: clamp(15.5px, 1.25vw, 18px);
+  line-height: 1.65;
+  color: #cbd5e1;
+  max-width: 620px;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+/* Modern Action Buttons */
+.hero-action-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+}
+
+.btn-hero-primary-modern {
+  background: #175cdd;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15.5px;
+  padding: 13px 28px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 10px 25px -4px rgba(23, 92, 221, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-primary-modern:hover {
+  background: #1e6af7;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -4px rgba(23, 92, 221, 0.6);
+}
+
+.btn-hero-secondary-modern {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15.5px;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-hero-secondary-modern:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Modern Horizontal Trust Metrics */
+.hero-trust-metrics {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  max-width: 100%;
+}
+
+.trust-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.metric-lbl {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* ---------- Centerpiece Frosted Glass Clinical Showcase Card ---------- */
+.hero-clinical-card {
+  background: rgba(10, 25, 47, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 26px 24px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.hero-clinical-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* Card Header Status */
+.clinical-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.clinical-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+  letter-spacing: 0.02em;
+}
+
+.pulse-dot-green {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+
+.clinical-card-emergency {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(23, 92, 221, 0.25);
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+/* Featured Doctor Row */
+.clinical-doctor-spotlight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.doctor-spotlight-avatar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.doctor-spotlight-avatar img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.doctor-spotlight-info {
+  min-width: 0;
+}
+
+.card-role-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #60a5fa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.card-doctor-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+  line-height: 1.25;
+}
+
+.card-doctor-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Micro Bento Capabilities */
+.clinical-capabilities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.capability-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.capability-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.capability-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(23, 92, 221, 0.22);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.capability-text {
+  min-width: 0;
+}
+
+.capability-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.25;
+  margin-bottom: 1px;
+}
+
+.capability-desc {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+
+/* Clinical Card Footer */
+.clinical-card-footer {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #cbd5e1;
+}
+
+.clinical-card-footer i {
+  color: #38bdf8;
+  font-size: 14px;
+}
+
+/* Hero Scroll Down Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+  color: #ffffff;
+}
+
+.indicator-mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  position: relative;
+  display: block;
+}
+
+.indicator-wheel {
+  width: 3px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes scrollWheel {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 14px); }
+}
+
+/* ---------- 4. PINNED STORYTELLING SECTION (#bnpc-story) ---------- */
+.bnpc-story-section {
+  position: relative;
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-top: 1px solid var(--bnpc-border-light);
+  border-bottom: 1px solid var(--bnpc-border-light);
+}
+
+.story-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bnpc-blue-50);
+  border: 1px solid rgba(23, 92, 221, 0.16);
+  color: var(--bnpc-blue-600);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* Left Image Stage */
+.story-visual-col {
+  position: relative;
+}
+
+.story-image-stage {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--bnpc-shadow-3d);
+  background: var(--bnpc-navy-950);
+}
+
+.story-frame-bg {
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(23, 92, 221, 0.4), rgba(255, 255, 255, 0.2));
+  z-index: 0;
+}
+
+.story-image-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.story-image-item.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.story-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(5, 19, 38, 0.75) 100%);
+  pointer-events: none;
+}
+
+.story-image-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  right: 28px;
+  color: #ffffff;
+  z-index: 3;
+}
+
+.story-image-caption .caption-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.story-image-caption h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Right Story Content & Tracker */
+.story-content-col {
+  padding-left: 40px;
+}
+
+.story-content-wrap {
+  position: relative;
+}
+
+/* Modern Tracker */
+.story-tracker {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.story-progress-bar {
+  flex-grow: 1;
+  height: 3px;
+  background: rgba(15, 43, 82, 0.08);
+  border-radius: 9999px;
+  position: relative;
+  overflow: hidden;
+  max-width: 160px;
+}
+
+.story-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  background: linear-gradient(90deg, #175cdd, #4da2ff);
+  border-radius: 9999px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-tracker-step {
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.story-tracker-step.active {
+  color: #175cdd;
+  transform: scale(1.15);
+}
+
+.story-tracker-step.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #175cdd;
+  border-radius: 2px;
+}
+
+/* Story Text Steps */
+.story-text-container {
+  position: relative;
+  min-height: 280px;
+}
+
+.story-step-content {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.story-step-content.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  position: relative;
+}
+
+.story-step-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  color: #175cdd;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.story-step-title {
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 800;
+  color: var(--bnpc-navy-900);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.story-step-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--bnpc-slate-600);
+  margin-bottom: 24px;
+}
+
+.story-step-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.story-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bnpc-blue-50);
+  border: 1px solid rgba(23, 92, 221, 0.12);
+  color: var(--bnpc-navy-800);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 9999px;
+}
+
+.story-feature-chip i {
+  color: #175cdd;
+}
+
+/* ---------- 5. IMAGE REVEAL ANIMATIONS ---------- */
+.bnpc-reveal-image {
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+}
+
+.bnpc-reveal-image img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, clip-path;
+}
+
+.bnpc-reveal-image:hover img {
+  transform: scale(1.03);
+}
+
+/* ---------- 6. SUBTLE 3D DEPTH & LAYERED PARALLAX ---------- */
+.parallax-layer-slow {
+  will-change: transform;
+}
+
+.parallax-layer-fast {
+  will-change: transform;
+}
+
+.depth-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  will-change: transform;
+}
+
+.depth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bnpc-shadow-lg);
+}
+
+/* ---------- 7. EDITORIAL SECTION CONTINUITY ---------- */
+.bnpc-about-section {
+  position: relative;
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.bnpc-trust-strip {
+  background: linear-gradient(135deg, var(--bnpc-navy-950) 0%, var(--bnpc-navy-900) 100%);
+  color: #ffffff;
+  padding: 45px 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(5, 19, 38, 0.15);
+}
+
+.trust-stat-column {
+  text-align: center;
+  padding: 15px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.col-lg-3:last-child .trust-stat-column {
+  border-right: none;
+}
+
+.trust-stat-num {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.trust-stat-num .stat-accent {
+  color: #4da2ff;
+}
+
+.trust-stat-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* ---------- 8. DOCTOR SECTION MOTION REFINEMENTS ---------- */
+.bnpc-doctors-section {
+  padding: 100px 0;
+  background: #f8fafc;
+  position: relative;
+}
+
+.bnpc-doctor-tab-btn {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 9999px !important;
+}
+
+.bnpc-doctor-tab-btn.active {
+  background: #175cdd !important;
+  box-shadow: 0 8px 20px -3px rgba(23, 92, 221, 0.35);
+  transform: translateY(-2px);
+}
+
+.doctor-profile-card {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--bnpc-shadow-md);
+  background: #ffffff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.doctor-profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--bnpc-shadow-lg);
+}
+
+/* ---------- 9. RESPONSIVE MOTION RULES ---------- */
+@media (max-width: 991.98px) {
+  .hero-content {
+    padding-top: 115px;
+    padding-bottom: 50px;
+  }
+  
+  .hero-depth-card-wrap {
+    display: none !important;
+  }
+
+  .hero-clinical-card {
+    margin-top: 24px;
+    max-width: 560px;
+  }
+
+  .hero-trust-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Pinned section smoothly degrades to editorial card sequence on mobile */
+  .bnpc-story-section {
+    min-height: auto !important;
+    padding: 60px 0;
+  }
+
+  .story-content-col {
+    padding-left: 15px;
+    margin-top: 40px;
+  }
+
+  .story-image-stage {
+    height: 340px;
+  }
+
+  .story-text-container {
+    min-height: auto;
+  }
+
+  .story-step-content {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--bnpc-border-light);
+  }
+
+  .story-step-content:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .story-tracker {
+    display: none !important;
+  }
+
+  .trust-stat-column {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 10px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-action-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-hero-primary-modern,
+  .btn-hero-secondary-modern {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+
+  .hero-trust-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 14px 16px;
+    width: 100%;
+  }
+
+  .metric-divider {
+    display: none;
+  }
+
+  .hero-clinical-card {
+    padding: 20px 16px;
+  }
+
+  .clinical-doctor-spotlight {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .doctor-spotlight-avatar img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .hero-scroll-indicator {
+    display: none !important;
+  }
+}
+
+/* ---------- 10. PREFERS-REDUCED-MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-video {
+    transform: none !important;
+  }
+
+  .story-image-item {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .story-step-content {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .bnpc-reveal-image img {
+    clip-path: none !important;
+    transform: none !important;
+  }
+}
